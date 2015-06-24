@@ -1,0 +1,14 @@
+fabric
+pytest
+requests
+requests_toolbelt
+datadiff
+slackclient
+docker-py>=1.2.2
+pymongo
+mysqlclient
+pyftpdlib
+pysmb
+pytest-instafail
+pytest-timeout
+pytest-capturelog
