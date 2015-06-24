@@ -7,8 +7,6 @@ MAINTAINER  Martijn Koster "martijn.koster@lucidworks.com"
 
 ENV PHANTOMJS_VERSION=1.9.8
 
-ADD requirements.txt /tmp/requirements.txt
-
 RUN export DEBIAN_FRONTEND=noninteractive && \
   apt-get update && \
   apt-get -y install ant git openssh-server \
@@ -21,7 +19,6 @@ RUN export DEBIAN_FRONTEND=noninteractive && \
   (echo "jenkins:jenkins" | chpasswd)  && \
   apt-get -y install libmysqlclient-dev && \
   pip install virtualenv && \
-  pip install -r /tmp/requirements.txt && \
   wget https://bitbucket.org/ariya/phantomjs/downloads/phantomjs-$PHANTOMJS_VERSION-linux-x86_64.tar.bz2 && \
   apt-get -y install bzip2 libfreetype6 libfontconfig && \
   tar xjC /opt < phantomjs-$PHANTOMJS_VERSION-linux-x86_64.tar.bz2 && \
@@ -32,6 +29,7 @@ RUN export DEBIAN_FRONTEND=noninteractive && \
 RUN wget -qO- https://get.docker.com/ | sh && \
   usermod -aG docker jenkins
 
+ADD requirements.txt /tmp/requirements.txt
 ADD pyenv.sh /tmp/pyenv.sh
 RUN bash -x /tmp/pyenv.sh
 
