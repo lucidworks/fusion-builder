@@ -19,7 +19,7 @@ RUN export DEBIAN_FRONTEND=noninteractive && \
   (echo "jenkins:jenkins" | chpasswd)  && \
   apt-get -y install libmysqlclient-dev libpq-dev && \
   pip install virtualenv && \
-  wget https://bitbucket.org/ariya/phantomjs/downloads/phantomjs-$PHANTOMJS_VERSION-linux-x86_64.tar.bz2 && \
+  wget --progress=dot https://bitbucket.org/ariya/phantomjs/downloads/phantomjs-$PHANTOMJS_VERSION-linux-x86_64.tar.bz2 && \
   apt-get -y install bzip2 libfreetype6 libfontconfig && \
   tar xjC /opt < phantomjs-$PHANTOMJS_VERSION-linux-x86_64.tar.bz2 && \
   rm phantomjs-$PHANTOMJS_VERSION-linux-x86_64.tar.bz2 && \
