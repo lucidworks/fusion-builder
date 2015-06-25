@@ -7,7 +7,8 @@ MAINTAINER  Martijn Koster "martijn.koster@lucidworks.com"
 
 ENV PHANTOMJS_VERSION=1.9.8
 
-RUN export DEBIAN_FRONTEND=noninteractive && \
+RUN export DEBIAN_FRONTEND=noninteractive TERM=linux && \
+  echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selections && \
   apt-get update && \
   apt-get -y install ant git openssh-server \
   build-essential libxml2-dev libxslt1-dev python-dev python-pip \
@@ -26,7 +27,8 @@ RUN export DEBIAN_FRONTEND=noninteractive && \
   ln -s /opt/phantomjs-$PHANTOMJS_VERSION-linux-x86_64/bin/phantomjs /usr/local/bin/ && \
   apt-get -y install vim && \
   apt-get -y install smbclient
-RUN wget --no-verbose --output-document=- https://get.docker.com/ | sh && \
+RUN export DEBIAN_FRONTEND=noninteractive TERM=linux && \
+  wget --no-verbose --output-document=- https://get.docker.com/ | sh && \
   usermod -aG docker jenkins
 
 ADD requirements.txt /tmp/requirements.txt
