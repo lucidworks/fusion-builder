@@ -33,7 +33,8 @@ RUN export DEBIAN_FRONTEND=noninteractive TERM=linux && \
 
 ADD requirements.txt /tmp/requirements.txt
 ADD pyenv.sh /tmp/pyenv.sh
-RUN bash -x /tmp/pyenv.sh
+RUN export DEBIAN_FRONTEND=noninteractive TERM=linux && \
+  bash -x /tmp/pyenv.sh
 
 EXPOSE 22 8764
 
