@@ -17,7 +17,7 @@ RUN export DEBIAN_FRONTEND=noninteractive && \
   mkdir -p /var/run/sshd && \
   adduser --quiet --gecos "" --disabled-password jenkins && \
   (echo "jenkins:jenkins" | chpasswd)  && \
-  apt-get -y install libmysqlclient-dev && \
+  apt-get -y install libmysqlclient-dev libpq-dev && \
   pip install virtualenv && \
   wget https://bitbucket.org/ariya/phantomjs/downloads/phantomjs-$PHANTOMJS_VERSION-linux-x86_64.tar.bz2 && \
   apt-get -y install bzip2 libfreetype6 libfontconfig && \
