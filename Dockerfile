@@ -19,14 +19,14 @@ RUN export DEBIAN_FRONTEND=noninteractive && \
   (echo "jenkins:jenkins" | chpasswd)  && \
   apt-get -y install libmysqlclient-dev libpq-dev && \
   pip install virtualenv && \
-  wget --progress=dot https://bitbucket.org/ariya/phantomjs/downloads/phantomjs-$PHANTOMJS_VERSION-linux-x86_64.tar.bz2 && \
+  wget --no-verbose https://bitbucket.org/ariya/phantomjs/downloads/phantomjs-$PHANTOMJS_VERSION-linux-x86_64.tar.bz2 && \
   apt-get -y install bzip2 libfreetype6 libfontconfig && \
   tar xjC /opt < phantomjs-$PHANTOMJS_VERSION-linux-x86_64.tar.bz2 && \
   rm phantomjs-$PHANTOMJS_VERSION-linux-x86_64.tar.bz2 && \
   ln -s /opt/phantomjs-$PHANTOMJS_VERSION-linux-x86_64/bin/phantomjs /usr/local/bin/ && \
   apt-get -y install vim && \
   apt-get -y install smbclient
-RUN wget -qO- https://get.docker.com/ | sh && \
+RUN wget --no-verbose --output-document=- https://get.docker.com/ | sh && \
   usermod -aG docker jenkins
 
 ADD requirements.txt /tmp/requirements.txt
