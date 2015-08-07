@@ -1,6 +1,8 @@
 datadiff
 docker-py>=1.2.2
+envoy
 fabric
+kazoo
 lxml
 mysqlclient
 psycopg2
