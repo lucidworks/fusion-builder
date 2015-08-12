@@ -10,7 +10,6 @@ pyftpdlib
 pymongo
 pysmb
 pytest
-pytest-capturelog
 pytest-instafail
 pytest-timeout
 python-ntlm3
@@ -19,3 +18,4 @@ requests_ntlm
 requests_toolbelt
 slackclient
 sqlalchemy
+subvertpy
