@@ -20,3 +20,4 @@ pyenv global $PYTHON_VERSION
 python --version
 pip install --upgrade pip
 pip install -r /tmp/requirements.txt
+chown -R jenkins:jenkins $(pwd)/.pyenv
