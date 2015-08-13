@@ -11,6 +11,7 @@ pymongo
 pysmb
 pytest
 pytest-instafail
+pytest-capturelog
 pytest-timeout
 python-ntlm3
 requests
