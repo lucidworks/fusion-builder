@@ -8,7 +8,7 @@ MAINTAINER  Martijn Koster "martijn.koster@lucidworks.com"
 ENV PHANTOMJS_VERSION=1.9.8
 ENV SPARK_VERSION=1.4.1
 ENV SPARK_PACKAGE=${SPARK_VERSION}-bin-hadoop2.6
-ENV SPARK_BASE_PACKAGE=/opt
+ENV SPARK_BASE=/opt
 
 
 RUN export DEBIAN_FRONTEND=noninteractive TERM=linux && \
@@ -44,13 +44,12 @@ RUN export DEBIAN_FRONTEND=noninteractive TERM=linux && \
   export LC_ALL=en_US.UTF-8 && \
   dpkg-reconfigure locales
 # Download Spark for the python bindings
-RUN wget -O ${SPARK_BASE_PACKAGE}/spark-${SPARK_PACKAGE}.tgz --no-verbose http://psg.mtu.edu/pub/apache/spark/spark-${SPARK_VERSION}/spark-${SPARK_PACKAGE}.tgz && \
-  cd ${SPARK_BASE_PACKAGE} && \
+RUN wget -O ${SPARK_BASE}/spark-${SPARK_PACKAGE}.tgz --no-verbose http://psg.mtu.edu/pub/apache/spark/spark-${SPARK_VERSION}/spark-${SPARK_PACKAGE}.tgz && \
+  cd ${SPARK_BASE} && \
   tar xzf spark-${SPARK_PACKAGE}.tgz && \
   ln -s /opt/spark-${SPARK_PACKAGE} /opt/spark && \
-  chown -R jenkins:jenkins /opt/spark
-
-
+  chown -R jenkins:jenkins /opt/spark && \
+  rm ${SPARK_BASE}/spark-${SPARK_PACKAGE}.tgz
 
 ADD requirements.txt /tmp/requirements.txt
 ADD pyenv.sh /tmp/pyenv.sh
