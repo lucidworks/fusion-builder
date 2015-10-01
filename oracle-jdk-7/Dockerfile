@@ -44,7 +44,7 @@ RUN export DEBIAN_FRONTEND=noninteractive TERM=linux && \
   export LC_ALL=en_US.UTF-8 && \
   dpkg-reconfigure locales
 # Download Spark for the python bindings
-RUN wget -O ${SPARK_BASE}/spark-${SPARK_PACKAGE}.tgz --no-verbose http://psg.mtu.edu/pub/apache/spark/spark-${SPARK_VERSION}/spark-${SPARK_PACKAGE}.tgz && \
+RUN wget -O ${SPARK_BASE}/spark-${SPARK_PACKAGE}.tgz --no-verbose http://apache.cs.utah.edu/spark/spark-${SPARK_VERSION}/spark-${SPARK_PACKAGE}.tgz && \
   cd ${SPARK_BASE} && \
   tar xzf spark-${SPARK_PACKAGE}.tgz && \
   ln -s /opt/spark-${SPARK_PACKAGE} /opt/spark && \
