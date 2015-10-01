@@ -19,9 +19,9 @@ RUN export DEBIAN_FRONTEND=noninteractive TERM=linux && \
   curl netcat-openbsd net-tools procps lsof && \
   sed -i 's|session    required     pam_loginuid.so|session    optional     pam_loginuid.so|g' /etc/pam.d/sshd && \
   mkdir -p /var/run/sshd && \
-  mkdir -p /home/jenkins/.ssh && chown -R jenkins:jenkins /home/jenkins/.ssh && \
   adduser --quiet --gecos "" --disabled-password jenkins && \
   (echo "jenkins:jenkins" | chpasswd)  && \
+  mkdir -p /home/jenkins/.ssh && chown -R jenkins:jenkins /home/jenkins/.ssh && \
   apt-get -y install libmysqlclient-dev libpq-dev libsvn-dev && \
   pip install virtualenv && \
   wget --no-verbose https://bitbucket.org/ariya/phantomjs/downloads/phantomjs-$PHANTOMJS_VERSION-linux-x86_64.tar.bz2 && \
