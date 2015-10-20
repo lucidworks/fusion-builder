@@ -51,6 +51,11 @@ RUN wget -O ${SPARK_BASE}/spark-${SPARK_PACKAGE}.tgz --no-verbose http://apache.
   ln -s /opt/spark-${SPARK_PACKAGE} /opt/spark && \
   chown -R jenkins:jenkins /opt/spark && \
   rm ${SPARK_BASE}/spark-${SPARK_PACKAGE}.tgz
+# Add maven, for #osdevs
+RUN mkdir -p /opt/apache-maven && \
+  wget -nv --output-document=/opt/apache-maven.tgz http://mirror.vorboss.net/apache/maven/maven-3/3.3.3/binaries/apache-maven-3.3.3-bin.tar.gz && \
+  tar -C /opt/apache-maven --extract --file /opt/apache-maven.tgz --strip-components=1 && \
+  ln -s /opt/apache-maven/bin/mvn /usr/local/bin/mvn
 
 ADD requirements.txt /tmp/requirements.txt
 ADD pyenv.sh /tmp/pyenv.sh
