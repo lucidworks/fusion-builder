@@ -22,7 +22,7 @@ RUN export DEBIAN_FRONTEND=noninteractive TERM=linux && \
   apt-get -y install libmysqlclient-dev libpq-dev libsvn-dev && \
   pip install virtualenv && \
   wget --no-verbose https://bitbucket.org/ariya/phantomjs/downloads/phantomjs-$PHANTOMJS_VERSION-linux-x86_64.tar.bz2 && \
-  apt-get -y install bzip2 libfreetype6 libfontconfig unzip && \
+  apt-get -y install bzip2 libfreetype6 libfontconfig unzip zip && \
   tar xjC /opt < phantomjs-$PHANTOMJS_VERSION-linux-x86_64.tar.bz2 && \
   rm phantomjs-$PHANTOMJS_VERSION-linux-x86_64.tar.bz2 && \
   ln -s /opt/phantomjs-$PHANTOMJS_VERSION-linux-x86_64/bin/phantomjs /usr/local/bin/ && \
