@@ -13,6 +13,7 @@ pytest
 pytest-instafail
 pytest-capturelog
 pytest-timeout
+pytest-xdist
 python-ntlm3
 requests
 requests_ntlm
