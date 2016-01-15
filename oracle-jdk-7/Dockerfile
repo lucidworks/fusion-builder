@@ -7,6 +7,9 @@ MAINTAINER  Martijn Koster "martijn.koster@lucidworks.com"
 
 ENV PHANTOMJS_VERSION=1.9.8
 
+ENV JENKINS_GID=7000
+ENV JENKINS_UID=7000
+
 RUN export DEBIAN_FRONTEND=noninteractive TERM=linux && \
   echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selections && \
   apt-get update && \
@@ -16,7 +19,8 @@ RUN export DEBIAN_FRONTEND=noninteractive TERM=linux && \
   curl netcat-openbsd net-tools procps lsof rpm gnupg expect && \
   sed -i 's|session    required     pam_loginuid.so|session    optional     pam_loginuid.so|g' /etc/pam.d/sshd && \
   mkdir -p /var/run/sshd && \
-  adduser --quiet --gecos "" --disabled-password jenkins && \
+  groupadd --gid $JENKINS_GID jenkins && \
+  adduser --quiet --gecos "" --disabled-password --uid $JENKINS_UID --gid $JENKINS_GID jenkins && \
   (echo "jenkins:jenkins" | chpasswd)  && \
   mkdir -p /home/jenkins/.ssh && chown -R jenkins:jenkins /home/jenkins/.ssh && \
   apt-get -y install libmysqlclient-dev libpq-dev libsvn-dev && \
