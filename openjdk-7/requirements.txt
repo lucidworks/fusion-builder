@@ -13,6 +13,7 @@
 #   ssh $host docker pull lucidworks/fusion-builder
 # done
 # If in doubt, ask mak in #apollo-build. Kiran and drewpink can also help out.
+awscli
 azure-storage==0.20.3  # ver 0.30.0 has breaking changes
 boto3
 cmislib
