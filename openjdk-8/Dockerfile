@@ -15,7 +15,7 @@ RUN export DEBIAN_FRONTEND=noninteractive TERM=linux && \
   apt-get update && \
   apt-get -y install ant git openssh-server \
   build-essential libxml2-dev libxslt1-dev python-dev python-pip \
-  libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev \
+  libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev libffi-dev \
   curl netcat-openbsd net-tools procps lsof rpm gnupg expect && \
   sed -i 's|session    required     pam_loginuid.so|session    optional     pam_loginuid.so|g' /etc/pam.d/sshd && \
   mkdir -p /var/run/sshd && \
