@@ -5,7 +5,7 @@
 FROM    java:openjdk-7
 MAINTAINER  Martijn Koster "martijn.koster@lucidworks.com"
 
-ENV PHANTOMJS_VERSION=1.9.8
+ENV PHANTOMJS_VERSION=2.1.1
 
 ENV JENKINS_GID=7000
 ENV JENKINS_UID=7000
