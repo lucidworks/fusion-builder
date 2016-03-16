@@ -12,8 +12,23 @@ ENV JENKINS_UID=7000
 
 RUN export DEBIAN_FRONTEND=noninteractive TERM=linux && \
   echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selections && \
-  apt-get update && \
-  apt-get -y install ant git openssh-server \
+  apt-get update
+
+RUN apt-get -y install git build-essential libssl-dev libcurl4-openssl-dev libexpat1-dev gettext libz-dev automake autoconf
+RUN git clone https://github.com/git/git && \
+  cd git && \
+  git checkout v2.7.3 && \
+  export NO_TCLTK=YesPlease && \
+  make configure && \
+  ./configure --prefix=/usr && \
+  make all && \
+  make install install && \
+  /usr/bin/git --version && \
+  cd .. && rm -fr git
+RUN git --version
+
+RUN export DEBIAN_FRONTEND=noninteractive TERM=linux && \
+  apt-get -y install ant openssh-server \
   build-essential libxml2-dev libxslt1-dev python-dev python-pip \
   libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev libffi-dev \
   curl netcat-openbsd net-tools procps lsof rpm gnupg expect && \
