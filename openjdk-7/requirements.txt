@@ -15,6 +15,7 @@
 # If in doubt, ask mak in #apollo-build. Kiran and drewpink can also help out.
 awscli
 azure-storage==0.20.3  # ver 0.30.0 has breaking changes
+beautifulsoup4
 boto3
 cmislib
 datadiff
