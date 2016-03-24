@@ -33,7 +33,9 @@ RUN export DEBIAN_FRONTEND=noninteractive TERM=linux && \
   libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev libffi-dev \
   curl netcat-openbsd net-tools procps lsof rpm gnupg expect \
   libmysqlclient-dev libpq-dev libsvn-dev bzip2 libfreetype6 libfontconfig \
-  unzip zip less vim smbclient
+  unzip zip less vim smbclient && \
+  apt-get clean && \
+  rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 RUN sed -i 's|session    required     pam_loginuid.so|session    optional     pam_loginuid.so|g' /etc/pam.d/sshd && \
   mkdir -p /var/run/sshd && \
   groupadd --gid $JENKINS_GID jenkins && \
