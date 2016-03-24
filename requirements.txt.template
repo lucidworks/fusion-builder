@@ -1,0 +1,51 @@
+# The python dependencies are pre-installed in the fusion-builder docker image,
+# for repeatability, test time reduction, and convenience.
+# Please keep the modules in this file alphabetically sorted for ease of use.
+# If you add modules to this file, you will need to update the docker image:
+# - copy it to the jdk subdirectories in https://github.com/LucidWorks/fusion-builder
+# - push to github, which will trigger automated builds on https://hub.docker.com/r/lucidworks/fusion-builder/
+# - wait for those images to rebuild (see the Build Details tab)
+# - Update the images on the docker hosts:
+# for host in build1 n1 n2; do
+#   for build in openjdk-7 openjdk-8 oracle-jdk-7; do
+#     ssh $host docker pull lucidworks/fusion-builder:$build
+#   done
+#   ssh $host docker pull lucidworks/fusion-builder
+# done
+# If in doubt, ask mak in #apollo-build. Kiran and drewpink can also help out.
+awscli
+azure-storage==0.20.3  # ver 0.30.0 has breaking changes
+beautifulsoup4
+boto3
+cmislib
+datadiff
+docker-py>=1.5.0
+envoy
+fabric
+fake-factory
+fpdf
+google-api-python-client
+httplib2
+kazoo
+lxml
+mysqlclient
+oauth2client
+psycopg2
+python-docx
+pyftpdlib
+pymongo
+pysmb==1.1.16  # 1.1.17 is broken
+pytest
+pytest-benchmark
+pytest-capturelog
+pytest-instafail
+pytest-timeout
+python-ntlm3
+pytest-xdist
+requests
+requests_ntlm
+requests_toolbelt
+simple_salesforce
+slackclient
+sqlalchemy
+subvertpy
