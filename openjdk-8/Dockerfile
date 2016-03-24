@@ -31,16 +31,16 @@ RUN export DEBIAN_FRONTEND=noninteractive TERM=linux && \
   apt-get -y install ant openssh-server \
   build-essential libxml2-dev libxslt1-dev python-dev python-pip \
   libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev libffi-dev \
-  curl netcat-openbsd net-tools procps lsof rpm gnupg expect && \
-  sed -i 's|session    required     pam_loginuid.so|session    optional     pam_loginuid.so|g' /etc/pam.d/sshd && \
+  curl netcat-openbsd net-tools procps lsof rpm gnupg expect \
+  libmysqlclient-dev libpq-dev libsvn-dev bzip2 libfreetype6 libfontconfig \
+  unzip zip less vim smbclient
+RUN sed -i 's|session    required     pam_loginuid.so|session    optional     pam_loginuid.so|g' /etc/pam.d/sshd && \
   mkdir -p /var/run/sshd && \
   groupadd --gid $JENKINS_GID jenkins && \
   adduser --quiet --gecos "" --disabled-password --uid $JENKINS_UID --gid $JENKINS_GID jenkins && \
   (echo "jenkins:jenkins" | chpasswd)  && \
-  mkdir -p /home/jenkins/.ssh && chown -R jenkins:jenkins /home/jenkins/.ssh && \
-  apt-get -y install libmysqlclient-dev libpq-dev libsvn-dev && \
-  pip install virtualenv && \
-  apt-get -y install bzip2 libfreetype6 libfontconfig unzip zip less vim smbclient
+  mkdir -p /home/jenkins/.ssh && chown -R jenkins:jenkins /home/jenkins/.ssh
+RUN pip install virtualenv
 RUN wget --no-verbose https://bitbucket.org/ariya/phantomjs/downloads/phantomjs-$PHANTOMJS_VERSION-linux-x86_64.tar.bz2 && \
   tar xjC /opt < phantomjs-$PHANTOMJS_VERSION-linux-x86_64.tar.bz2 && \
   rm phantomjs-$PHANTOMJS_VERSION-linux-x86_64.tar.bz2 && \
