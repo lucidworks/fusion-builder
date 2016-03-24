@@ -40,13 +40,11 @@ RUN export DEBIAN_FRONTEND=noninteractive TERM=linux && \
   mkdir -p /home/jenkins/.ssh && chown -R jenkins:jenkins /home/jenkins/.ssh && \
   apt-get -y install libmysqlclient-dev libpq-dev libsvn-dev && \
   pip install virtualenv && \
-  wget --no-verbose https://bitbucket.org/ariya/phantomjs/downloads/phantomjs-$PHANTOMJS_VERSION-linux-x86_64.tar.bz2 && \
-  apt-get -y install bzip2 libfreetype6 libfontconfig unzip zip less && \
+  apt-get -y install bzip2 libfreetype6 libfontconfig unzip zip less vim smbclient
+RUN wget --no-verbose https://bitbucket.org/ariya/phantomjs/downloads/phantomjs-$PHANTOMJS_VERSION-linux-x86_64.tar.bz2 && \
   tar xjC /opt < phantomjs-$PHANTOMJS_VERSION-linux-x86_64.tar.bz2 && \
   rm phantomjs-$PHANTOMJS_VERSION-linux-x86_64.tar.bz2 && \
-  ln -s /opt/phantomjs-$PHANTOMJS_VERSION-linux-x86_64/bin/phantomjs /usr/local/bin/ && \
-  apt-get -y install vim && \
-  apt-get -y install smbclient
+  ln -s /opt/phantomjs-$PHANTOMJS_VERSION-linux-x86_64/bin/phantomjs /usr/local/bin/
 RUN export DEBIAN_FRONTEND=noninteractive TERM=linux && \
   wget --no-verbose --output-document=- https://get.docker.com/ | sh && \
   usermod -aG docker jenkins
