@@ -17,7 +17,7 @@ RUN export DEBIAN_FRONTEND=noninteractive TERM=linux && \
 RUN apt-get -y install git build-essential libssl-dev libcurl4-openssl-dev libexpat1-dev gettext libz-dev automake autoconf
 RUN git clone https://github.com/git/git && \
   cd git && \
-  git checkout v2.7.3 && \
+  git checkout v2.7.4 && \
   export NO_TCLTK=YesPlease && \
   make configure && \
   ./configure --prefix=/usr && \
