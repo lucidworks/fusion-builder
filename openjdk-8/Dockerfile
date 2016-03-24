@@ -5,7 +5,10 @@
 FROM    java:openjdk-8u66
 MAINTAINER  Martijn Koster "martijn.koster@lucidworks.com"
 
+# See http://phantomjs.org/download.html
 ENV PHANTOMJS_VERSION=2.1.1
+# Use the sha256 checksum for the linux-x86_64.tar.bz2
+ENV PHANTOMJS_SHA256_CHECKSUM=86dd9a4bf4aee45f1a84c9f61cf1947c1d6dce9b9e8d2a907105da7852460d2f
 
 ENV JENKINS_GID=7000
 ENV JENKINS_UID=7000
@@ -44,6 +47,9 @@ RUN sed -i 's|session    required     pam_loginuid.so|session    optional     pa
   mkdir -p /home/jenkins/.ssh && chown -R jenkins:jenkins /home/jenkins/.ssh
 RUN pip install virtualenv
 RUN wget --no-verbose https://bitbucket.org/ariya/phantomjs/downloads/phantomjs-$PHANTOMJS_VERSION-linux-x86_64.tar.bz2 && \
+  echo "$PHANTOMJS_SHA256_CHECKSUM phantomjs-$PHANTOMJS_VERSION-linux-x86_64.tar.bz2" > phantomjs-$PHANTOMJS_VERSION-linux-x86_64.tar.bz2.sha256 && \
+  sha256sum -c phantomjs-$PHANTOMJS_VERSION-linux-x86_64.tar.bz2.sha256 && \
+  rm phantomjs-$PHANTOMJS_VERSION-linux-x86_64.tar.bz2.sha256 && \
   tar xjC /opt < phantomjs-$PHANTOMJS_VERSION-linux-x86_64.tar.bz2 && \
   rm phantomjs-$PHANTOMJS_VERSION-linux-x86_64.tar.bz2 && \
   ln -s /opt/phantomjs-$PHANTOMJS_VERSION-linux-x86_64/bin/phantomjs /usr/local/bin/
