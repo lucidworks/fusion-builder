@@ -17,6 +17,7 @@ awscli
 azure-storage==0.20.3  # ver 0.30.0 has breaking changes
 beautifulsoup4
 boto3
+boxsdk[jwt]
 cmislib
 datadiff
 docker-py>=1.5.0
