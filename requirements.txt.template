@@ -19,6 +19,7 @@ beautifulsoup4
 boto3
 boxsdk[jwt]
 cmislib
+cryptography==1.2.2
 datadiff
 docker-py>=1.5.0
 envoy
@@ -29,6 +30,7 @@ google-api-python-client
 httplib2
 kazoo
 lxml
+mechanize
 mysqlclient
 oauth2client
 psycopg2
