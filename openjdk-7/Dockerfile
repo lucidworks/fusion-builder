@@ -47,7 +47,7 @@ RUN sed -i 's|session    required     pam_loginuid.so|session    optional     pa
   adduser --quiet --gecos "" --disabled-password --uid $JENKINS_UID --gid $JENKINS_GID jenkins && \
   (echo "jenkins:jenkins" | chpasswd)  && \
   mkdir -p /home/jenkins/.ssh && chown -R jenkins:jenkins /home/jenkins/.ssh
-RUN pip install virtualenv
+RUN pip install virtualenv awscli
 RUN wget --no-verbose $PHANTOMJS_URL && \
   echo "$PHANTOMJS_SHA256_CHECKSUM phantomjs-$PHANTOMJS_VERSION-linux-x86_64.tar.bz2" > phantomjs-$PHANTOMJS_VERSION-linux-x86_64.tar.bz2.sha256 && \
   sha256sum -c phantomjs-$PHANTOMJS_VERSION-linux-x86_64.tar.bz2.sha256 && \
