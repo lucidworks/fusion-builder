@@ -9,6 +9,10 @@ MAINTAINER  Martijn Koster "martijn.koster@lucidworks.com"
 ENV PHANTOMJS_VERSION=2.1.1
 # Use the sha256 checksum for the linux-x86_64.tar.bz2
 ENV PHANTOMJS_SHA256_CHECKSUM=86dd9a4bf4aee45f1a84c9f61cf1947c1d6dce9b9e8d2a907105da7852460d2f
+# Use our copy
+ENV PHANTOMJS_URL=https://s3.amazonaws.com/lucidworks-build-dependencies-public/phantomjs-$PHANTOMJS_VERSION-linux-x86_64.tar.bz2
+
+ENV MAVEN_URL=https://archive.apache.org/dist/maven/maven-3/3.3.3/binaries/apache-maven-3.3.3-bin.tar.gz
 
 ENV JENKINS_GID=7000
 ENV JENKINS_UID=7000
@@ -45,8 +49,8 @@ RUN sed -i 's|session    required     pam_loginuid.so|session    optional     pa
   adduser --quiet --gecos "" --disabled-password --uid $JENKINS_UID --gid $JENKINS_GID jenkins && \
   (echo "jenkins:jenkins" | chpasswd)  && \
   mkdir -p /home/jenkins/.ssh && chown -R jenkins:jenkins /home/jenkins/.ssh
-RUN pip install virtualenv
-RUN wget --no-verbose https://bitbucket.org/ariya/phantomjs/downloads/phantomjs-$PHANTOMJS_VERSION-linux-x86_64.tar.bz2 && \
+RUN pip install virtualenv awscli beautifulsoup4
+RUN wget --no-verbose $PHANTOMJS_URL && \
   echo "$PHANTOMJS_SHA256_CHECKSUM phantomjs-$PHANTOMJS_VERSION-linux-x86_64.tar.bz2" > phantomjs-$PHANTOMJS_VERSION-linux-x86_64.tar.bz2.sha256 && \
   sha256sum -c phantomjs-$PHANTOMJS_VERSION-linux-x86_64.tar.bz2.sha256 && \
   rm phantomjs-$PHANTOMJS_VERSION-linux-x86_64.tar.bz2.sha256 && \
@@ -67,7 +71,7 @@ RUN export DEBIAN_FRONTEND=noninteractive TERM=linux && \
   dpkg-reconfigure locales
 # Add maven, for #osdevs
 RUN mkdir -p /opt/apache-maven && \
-  wget -nv --output-document=/opt/apache-maven.tgz http://mirror.vorboss.net/apache/maven/maven-3/3.3.3/binaries/apache-maven-3.3.3-bin.tar.gz && \
+  wget -nv --output-document=/opt/apache-maven.tgz $MAVEN_URL && \
   tar -C /opt/apache-maven --extract --file /opt/apache-maven.tgz --strip-components=1 && \
   ln -s /opt/apache-maven/bin/mvn /usr/local/bin/mvn && \
   rm /opt/apache-maven.tgz
@@ -83,4 +87,6 @@ ENV LC_ALL en_US.UTF-8
 
 EXPOSE 22 8764
 
-CMD ["/usr/sbin/sshd", "-D"]
+COPY docker-entrypoint.sh /
+RUN mkdir /docker-entrypoint-initdb.d
+ENTRYPOINT ["/docker-entrypoint.sh"]

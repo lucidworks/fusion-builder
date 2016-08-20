@@ -1,17 +1,19 @@
 # The python dependencies are pre-installed in the fusion-builder docker image,
 # for repeatability, test time reduction, and convenience.
 # Please keep the modules in this file alphabetically sorted for ease of use.
-# If you add modules to this file, you will need to update the docker image:
-# - copy it to the jdk subdirectories in https://github.com/LucidWorks/fusion-builder
+# If you add modules to this file, you will need to also update the docker image:
+# - copy it to the jdk subdirectories in https://github.com/lucidworks/fusion-builder
 # - push to github, which will trigger automated builds on https://hub.docker.com/r/lucidworks/fusion-builder/
 # - wait for those images to rebuild (see the Build Details tab)
 # - Update the images on the docker hosts:
-# for host in build1 n1 n2; do
+# for host in build1 n1 n2 n3 n4 n5; do
 #   for build in openjdk-7 openjdk-8 oracle-jdk-7; do
 #     ssh $host docker pull lucidworks/fusion-builder:$build
 #   done
 #   ssh $host docker pull lucidworks/fusion-builder
 # done
+# If your library requires special Ubuntu libraries, you'll need to add them
+# to the Dockerfile in the jdk subdirectories.
 # If in doubt, ask mak in #apollo-build. Kiran and drewpink can also help out.
 awscli
 azure-storage==0.20.3  # ver 0.30.0 has breaking changes
@@ -20,6 +22,7 @@ boto3
 boxsdk[jwt]
 cmislib
 cryptography==1.2.2
+cuisine
 datadiff
 docker-py>=1.5.0
 envoy
@@ -29,16 +32,17 @@ fpdf
 google-api-python-client
 httplib2
 kazoo
-lxml
+lxml==3.5.0
 mechanize
 mysqlclient
 oauth2client
 psycopg2
 python-docx
 pyftpdlib
+PyGithub
 pymongo
 pysmb==1.1.16  # 1.1.17 is broken
-pytest
+pytest>=2.9.1
 pytest-benchmark
 pytest-capturelog
 pytest-instafail
@@ -49,6 +53,8 @@ requests
 requests_ntlm
 requests_toolbelt
 simple_salesforce
+six>=1.3.0
 slackclient
 sqlalchemy
 subvertpy
+urllib3>=1.15.1
