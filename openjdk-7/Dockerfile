@@ -38,7 +38,7 @@ RUN export DEBIAN_FRONTEND=noninteractive TERM=linux && \
   apt-get -y install ant openssh-server \
   build-essential libxml2-dev libxslt1-dev libxmlsec1-dev python-dev python-pip \
   libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev libffi-dev \
-  curl netcat-openbsd net-tools procps lsof rpm gnupg expect \
+  curl netcat-openbsd net-tools procps lsof rpm gnupg gnupg2 expect \
   libmysqlclient-dev libpq-dev libsvn-dev bzip2 libfreetype6 libfontconfig \
   unzip zip less vim smbclient && \
   apt-get clean && \
