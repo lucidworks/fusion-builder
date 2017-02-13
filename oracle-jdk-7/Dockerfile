@@ -21,18 +21,7 @@ RUN export DEBIAN_FRONTEND=noninteractive TERM=linux && \
   echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selections && \
   apt-get update
 
-RUN apt-get -y install git build-essential libssl-dev libcurl4-openssl-dev libexpat1-dev gettext libz-dev automake autoconf
-RUN git clone https://github.com/git/git && \
-  cd git && \
-  git checkout v2.7.4 && \
-  export NO_TCLTK=YesPlease && \
-  make configure && \
-  ./configure --prefix=/usr && \
-  make all && \
-  make install install && \
-  /usr/bin/git --version && \
-  cd .. && rm -fr git
-RUN git --version
+RUN apt-get -y install build-essential libssl-dev libcurl4-openssl-dev libexpat1-dev gettext libz-dev automake autoconf
 
 RUN export DEBIAN_FRONTEND=noninteractive TERM=linux && \
   apt-get -y install ant openssh-server \
@@ -75,7 +64,11 @@ RUN mkdir -p /opt/apache-maven && \
   tar -C /opt/apache-maven --extract --file /opt/apache-maven.tgz --strip-components=1 && \
   ln -s /opt/apache-maven/bin/mvn /usr/local/bin/mvn && \
   rm /opt/apache-maven.tgz
-
+# Add git
+RUN curl -L https://lucid-public-tools.s3.amazonaws.com/git/git-bin-2.11.0.tar.gz -o /tmp/git.tar.gz && \
+  tar -C / --extract --file /tmp/git.tar.gz && \
+  /usr/bin/git --version && \
+  rm /tmp/git.tar.gz
 ADD requirements.txt /tmp/requirements.txt
 ADD pyenv.sh /tmp/pyenv.sh
 RUN export DEBIAN_FRONTEND=noninteractive TERM=linux && \
