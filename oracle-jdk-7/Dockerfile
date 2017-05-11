@@ -78,9 +78,4 @@ ENV LANGUAGE en_US:en
 ENV LANG en_US.UTF-8
 ENV LC_ALL en_US.UTF-8
 
-EXPOSE 22 8764
-
-COPY docker-entrypoint.sh /
-RUN mkdir /docker-entrypoint-initdb.d
-ENTRYPOINT ["/docker-entrypoint.sh"]
-CMD ["/usr/sbin/sshd", "-D"]
+EXPOSE 8764
