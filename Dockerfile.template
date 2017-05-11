@@ -83,3 +83,4 @@ EXPOSE 22 8764
 COPY docker-entrypoint.sh /
 RUN mkdir /docker-entrypoint-initdb.d
 ENTRYPOINT ["/docker-entrypoint.sh"]
+CMD ["/usr/sbin/sshd", "-D"]

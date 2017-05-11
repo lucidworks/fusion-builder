@@ -5,10 +5,6 @@ if [[ "$VERBOSE" = "yes" ]]; then
     set -x
 fi
 
-if [ "${1:0:1}" = '-' ]; then
-    set -- /usr/sbin/sshd -D
-fi
-
 if [[ ! -z "$INITDB" && "$INITDB" != 'no' ]]; then
     # execute files in /docker-entrypoint-initdb.d
     shopt -s nullglob
