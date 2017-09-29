@@ -2,7 +2,7 @@
 # plus dependencies for our build and some python tools we use for testing.
 # Note the plaintext password here; depending on your environment that may not be advisable.
 # Based on evarga/jenkins-slave
-FROM    java:openjdk-8u66
+FROM    java:openjdk-8
 MAINTAINER  Martijn Koster "martijn.koster@lucidworks.com"
 
 # See http://phantomjs.org/download.html
@@ -12,7 +12,7 @@ ENV PHANTOMJS_SHA256_CHECKSUM=86dd9a4bf4aee45f1a84c9f61cf1947c1d6dce9b9e8d2a9071
 # Use our copy
 ENV PHANTOMJS_URL=https://s3.amazonaws.com/lucidworks-build-dependencies-public/phantomjs-$PHANTOMJS_VERSION-linux-x86_64.tar.bz2
 
-ENV MAVEN_URL=https://archive.apache.org/dist/maven/maven-3/3.3.3/binaries/apache-maven-3.3.3-bin.tar.gz
+ENV MAVEN_URL=https://archive.apache.org/dist/maven/maven-3/3.5.0/binaries/apache-maven-3.5.0-bin.tar.gz
 
 ENV JENKINS_GID=7000
 ENV JENKINS_UID=7000
@@ -24,12 +24,12 @@ RUN export DEBIAN_FRONTEND=noninteractive TERM=linux && \
 RUN apt-get -y install build-essential libssl-dev libcurl4-openssl-dev libexpat1-dev gettext libz-dev automake autoconf
 
 RUN export DEBIAN_FRONTEND=noninteractive TERM=linux && \
-  apt-get -y install ant openssh-server \
+  apt-get -y install ant \
   build-essential libxml2-dev libxslt1-dev libxmlsec1-dev python-dev python-pip \
   libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev libffi-dev \
   curl netcat-openbsd net-tools procps lsof rpm gnupg gnupg2 expect \
   libmysqlclient-dev libpq-dev libsvn-dev bzip2 libfreetype6 libfontconfig \
-  unzip zip less vim smbclient openjfx && \
+  unzip zip less vim smbclient && \
   apt-get clean && \
   rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 RUN sed -i 's|session    required     pam_loginuid.so|session    optional     pam_loginuid.so|g' /etc/pam.d/sshd && \
@@ -65,7 +65,7 @@ RUN mkdir -p /opt/apache-maven && \
   ln -s /opt/apache-maven/bin/mvn /usr/local/bin/mvn && \
   rm /opt/apache-maven.tgz
 # Add git
-RUN curl -L https://lucid-public-tools.s3.amazonaws.com/git/git-bin-2.11.0.tar.gz -o /tmp/git.tar.gz && \
+RUN curl -L https://lucid-public-tools.s3.amazonaws.com/git/git-bin-2.14.2.tar.gz -o /tmp/git.tar.gz && \
   tar -C / --extract --file /tmp/git.tar.gz && \
   /usr/bin/git --version && \
   rm /tmp/git.tar.gz
@@ -74,8 +74,8 @@ ADD pyenv.sh /tmp/pyenv.sh
 RUN export DEBIAN_FRONTEND=noninteractive TERM=linux && \
   bash -x /tmp/pyenv.sh
 
+ADD build.info /build.info
+
 ENV LANGUAGE en_US:en
 ENV LANG en_US.UTF-8
 ENV LC_ALL en_US.UTF-8
-
-EXPOSE 8764
