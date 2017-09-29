@@ -12,7 +12,7 @@ ENV PHANTOMJS_SHA256_CHECKSUM=86dd9a4bf4aee45f1a84c9f61cf1947c1d6dce9b9e8d2a9071
 # Use our copy
 ENV PHANTOMJS_URL=https://s3.amazonaws.com/lucidworks-build-dependencies-public/phantomjs-$PHANTOMJS_VERSION-linux-x86_64.tar.bz2
 
-ENV MAVEN_URL=https://archive.apache.org/dist/maven/maven-3/3.3.3/binaries/apache-maven-3.3.3-bin.tar.gz
+ENV MAVEN_URL=https://archive.apache.org/dist/maven/maven-3/3.5.0/binaries/apache-maven-3.5.0-bin.tar.gz
 
 ENV JENKINS_GID=7000
 ENV JENKINS_UID=7000
