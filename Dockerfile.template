@@ -65,7 +65,7 @@ RUN mkdir -p /opt/apache-maven && \
   ln -s /opt/apache-maven/bin/mvn /usr/local/bin/mvn && \
   rm /opt/apache-maven.tgz
 # Add git
-RUN curl -L https://lucid-public-tools.s3.amazonaws.com/git/git-bin-2.11.0.tar.gz -o /tmp/git.tar.gz && \
+RUN curl -L https://lucid-public-tools.s3.amazonaws.com/git/git-bin-2.14.2.tar.gz -o /tmp/git.tar.gz && \
   tar -C / --extract --file /tmp/git.tar.gz && \
   /usr/bin/git --version && \
   rm /tmp/git.tar.gz
