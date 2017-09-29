@@ -2,7 +2,7 @@
 # plus dependencies for our build and some python tools we use for testing.
 # Note the plaintext password here; depending on your environment that may not be advisable.
 # Based on evarga/jenkins-slave
-FROM    java:openjdk-8u66
+FROM    java:openjdk-8
 MAINTAINER  Martijn Koster "martijn.koster@lucidworks.com"
 
 # See http://phantomjs.org/download.html
