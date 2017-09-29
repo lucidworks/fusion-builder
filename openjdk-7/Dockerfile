@@ -32,11 +32,9 @@ RUN export DEBIAN_FRONTEND=noninteractive TERM=linux && \
   unzip zip less vim smbclient && \
   apt-get clean && \
   rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
-RUN sed -i 's|session    required     pam_loginuid.so|session    optional     pam_loginuid.so|g' /etc/pam.d/sshd && \
-  mkdir -p /var/run/sshd && \
-  groupadd --gid $JENKINS_GID jenkins && \
+RUN groupadd --gid $JENKINS_GID jenkins && \
   adduser --quiet --gecos "" --disabled-password --uid $JENKINS_UID --gid $JENKINS_GID jenkins && \
-  (echo "jenkins:jenkins" | chpasswd)  && \
+  (echo "jenkins:jenkins" | chpasswd) && \
   mkdir -p /home/jenkins/.ssh && chown -R jenkins:jenkins /home/jenkins/.ssh
 RUN pip install virtualenv awscli beautifulsoup4
 RUN wget --no-verbose $PHANTOMJS_URL && \
