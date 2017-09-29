@@ -30,7 +30,7 @@ EOM
   fi
 }
 
-DIRS="openjdk-7 openjdk-8"
+DIRS="openjdk-7 openjdk-8 openjdk-9"
 for d in $DIRS; do
   build_and_push "$d"
 done
