@@ -16,13 +16,14 @@ CREATED=()
 
 function build_and_push {
   local d=$1
-  local IMAGE_NAME="lucidworks/fusion-builder-$d:$NOW"
+  local IMAGE_NAME="lucidworks/builder:$d-$NOW"
   cat >"$d/build.info" <<EOM
 IMAGE=$IMAGE_NAME
 GIT_COMMIT=${GIT_COMMIT:-}
 EOM
   (cd "$d"; docker build -t "$IMAGE_NAME" .)
-  docker tag "$IMAGE_NAME" "lucidworks/fusion-builder-$d:latest"
+  latest_tag=$(sed "s/-$NOW/-latest/" <<< $IMAGE_NAME)
+  docker tag "$IMAGE_NAME" "$latest_tag"
   CREATED+=("$IMAGE_NAME")
   if [[ ! -z "${DO_PUSH:-}" ]]; then
     docker push "$IMAGE_NAME"
@@ -30,7 +31,7 @@ EOM
   fi
 }
 
-DIRS="openjdk-7 openjdk-8 openjdk-9"
+DIRS="$(find . -mindepth 1 -maxdepth 1 -type d | sed -e 's,^\./,,' | egrep -v '^\.')"
 for d in $DIRS; do
   build_and_push "$d"
 done
