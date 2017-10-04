@@ -30,7 +30,7 @@ EOM
   CREATED+=("$IMAGE_NAME")
   if [[ ! -z "${DO_PUSH:-}" ]]; then
     docker push "$IMAGE_NAME"
-    docker push "lucidworks/fusion-builder-$d:latest"
+    docker push "$latest_tag"
   fi
 }
 
