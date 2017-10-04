@@ -50,6 +50,6 @@ cat >> report.txt <<EOM
 To use:
 
     docker login --username lucidworkstest --password XXX
-    docker pull lucidworks/fusion-builder-openjdk-8:$NOW
+    docker pull lucidworks/builder:openjdk-8-$NOW
 EOM
 
