@@ -1,4 +1,7 @@
 #!/bin/bash
+# Build and push fusion-builder
+# Run by https://ci.lucidworks.com/job/Operations/job/Fusion-builder/
+
 set -euo pipefail
 set -x
 
