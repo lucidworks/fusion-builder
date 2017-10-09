@@ -21,14 +21,18 @@ RUN export DEBIAN_FRONTEND=noninteractive TERM=linux && \
   echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selections && \
   apt-get update
 
-RUN add-apt-repository ppa:webupd8team/java && \
-  apt-get update
-
-RUN apt-get -y install build-essential libssl-dev libcurl4-openssl-dev libexpat1-dev gettext libz-dev automake autoconf
+  RUN if [ "${NEED_OPENJFX}" = "yes" ]; then \
+        echo "deb http://ftp.de.debian.org/debian jessie main" >> /etc/apt/sources.list && \
+        apt-get update; \
+        rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* \
+      else \
+        echo "Not installing OpenJFX"; \
+      fi
 
 RUN export DEBIAN_FRONTEND=noninteractive TERM=linux && \
   apt-get -y install ant \
-  build-essential libxml2-dev libxslt1-dev libxmlsec1-dev python-dev python-pip \
+  build-essential libssl-dev libcurl4-openssl-dev libexpat1-dev gettext libz-dev automake autoconf \
+  libxml2-dev libxslt1-dev libxmlsec1-dev python-dev python-pip \
   libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev libffi-dev \
   curl netcat-openbsd net-tools procps lsof rpm gnupg gnupg2 expect \
   libmysqlclient-dev libpq-dev libsvn-dev bzip2 libfreetype6 libfontconfig \
