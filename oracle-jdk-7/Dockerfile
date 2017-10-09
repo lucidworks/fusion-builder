@@ -21,6 +21,9 @@ RUN export DEBIAN_FRONTEND=noninteractive TERM=linux && \
   echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selections && \
   apt-get update
 
+RUN add-apt-repository ppa:webupd8team/java && \
+  apt-get update
+
 RUN apt-get -y install build-essential libssl-dev libcurl4-openssl-dev libexpat1-dev gettext libz-dev automake autoconf
 
 RUN export DEBIAN_FRONTEND=noninteractive TERM=linux && \

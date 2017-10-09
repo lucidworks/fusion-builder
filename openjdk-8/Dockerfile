@@ -21,6 +21,9 @@ RUN export DEBIAN_FRONTEND=noninteractive TERM=linux && \
   echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selections && \
   apt-get update
 
+RUN add-apt-repository ppa:webupd8team/java && \
+  apt-get update
+
 RUN apt-get -y install build-essential libssl-dev libcurl4-openssl-dev libexpat1-dev gettext libz-dev automake autoconf
 
 RUN export DEBIAN_FRONTEND=noninteractive TERM=linux && \
@@ -29,7 +32,7 @@ RUN export DEBIAN_FRONTEND=noninteractive TERM=linux && \
   libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev libffi-dev \
   curl netcat-openbsd net-tools procps lsof rpm gnupg gnupg2 expect \
   libmysqlclient-dev libpq-dev libsvn-dev bzip2 libfreetype6 libfontconfig \
-  unzip zip less vim smbclient openjfx && \
+  unzip zip less vim smbclient && \
   apt-get clean && \
   rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 RUN groupadd --gid $JENKINS_GID jenkins && \
