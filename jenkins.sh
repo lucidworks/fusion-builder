@@ -24,7 +24,13 @@ function build_and_push {
 IMAGE=$IMAGE_NAME
 GIT_COMMIT=${GIT_COMMIT:-}
 EOM
-  (cd "$d"; docker build -t "$IMAGE_NAME" .)
+
+  if [[ "$d" == "openjdk-8" ]]; then
+    NEED_OPENJFX=yes
+  else
+    NEED_OPENJFX=no
+  fi
+  (cd "$d"; docker build --build-arg "NEED_OPENJFX=$NEED_OPENJFX" -t "$IMAGE_NAME" .)
   latest_tag=$(sed "s/-$NOW/-latest/" <<< $IMAGE_NAME)
   docker tag "$IMAGE_NAME" "$latest_tag"
   CREATED+=("$IMAGE_NAME")
