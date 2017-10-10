@@ -5,6 +5,8 @@
 FROM    java:openjdk-9
 MAINTAINER  Martijn Koster "martijn.koster@lucidworks.com"
 
+ARG NEED_OPENJFX=no
+
 # See http://phantomjs.org/download.html
 ENV PHANTOMJS_VERSION=2.1.1
 # Use the sha256 checksum for the linux-x86_64.tar.bz2
@@ -24,7 +26,6 @@ RUN export DEBIAN_FRONTEND=noninteractive TERM=linux && \
 RUN if [ "${NEED_OPENJFX}" = "yes" ]; then \
       echo "deb http://ftp.de.debian.org/debian jessie main" >> /etc/apt/sources.list && \
       apt-get update; \
-      rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* \
     else \
       echo "Not installing OpenJFX"; \
     fi
