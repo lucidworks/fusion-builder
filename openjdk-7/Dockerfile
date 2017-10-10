@@ -21,13 +21,13 @@ RUN export DEBIAN_FRONTEND=noninteractive TERM=linux && \
   echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selections && \
   apt-get update
 
-  RUN if [ "${NEED_OPENJFX}" = "yes" ]; then \
-        echo "deb http://ftp.de.debian.org/debian jessie main" >> /etc/apt/sources.list && \
-        apt-get update; \
-        rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* \
-      else \
-        echo "Not installing OpenJFX"; \
-      fi
+RUN if [ "${NEED_OPENJFX}" = "yes" ]; then \
+      echo "deb http://ftp.de.debian.org/debian jessie main" >> /etc/apt/sources.list && \
+      apt-get update; \
+      rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* \
+    else \
+      echo "Not installing OpenJFX"; \
+    fi
 
 RUN export DEBIAN_FRONTEND=noninteractive TERM=linux && \
   apt-get -y install ant \
