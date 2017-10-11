@@ -21,7 +21,8 @@ ENV JENKINS_UID=7000
 
 RUN export DEBIAN_FRONTEND=noninteractive TERM=linux && \
   echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selections && \
-  apt-get update
+  apt-get update && \
+  apt-get -y install apt-utils
 
 RUN if [ "${NEED_OPENJFX}" = "yes" ]; then \
       echo "deb http://ftp.de.debian.org/debian jessie main" >> /etc/apt/sources.list && \
