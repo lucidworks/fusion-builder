@@ -26,6 +26,9 @@ RUN export DEBIAN_FRONTEND=noninteractive TERM=linux && \
 RUN if [ "${NEED_OPENJFX}" = "yes" ]; then \
       echo "deb http://ftp.de.debian.org/debian jessie main" >> /etc/apt/sources.list && \
       apt-get update; \
+      apt-get -y install openjfx; \
+      echo "installed openjfx"; \
+      dpkg -l | awk '{if ($2 == "openjfx") print}'; \
     else \
       echo "Not installing OpenJFX"; \
     fi
