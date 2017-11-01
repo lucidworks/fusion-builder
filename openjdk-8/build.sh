@@ -1,2 +1,2 @@
 #!/bin/bash
-docker build --build-arg NEED_OPENJFX=yes -t lucidworks/fusion-builder:openjdk-8 .
+docker build --no-cache --build-arg NEED_OPENJFX=yes -t lucidworks/fusion-builder:openjdk-8 .

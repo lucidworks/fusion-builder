@@ -1,2 +1,2 @@
 #!/bin/bash
-docker build -t lucidworks/fusion-builder:openjdk-7 .
+docker build --no-cache -t lucidworks/fusion-builder:openjdk-7 .
