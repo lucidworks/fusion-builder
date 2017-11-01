@@ -30,7 +30,7 @@ EOM
   else
     NEED_OPENJFX=no
   fi
-  (cd "$d"; docker build --build-arg "NEED_OPENJFX=$NEED_OPENJFX" -t "$IMAGE_NAME" .)
+  (cd "$d"; docker build --no-cache --build-arg "NEED_OPENJFX=$NEED_OPENJFX" -t "$IMAGE_NAME" .)
   latest_tag=$(sed "s/-$NOW/-latest/" <<< $IMAGE_NAME)
   docker tag "$IMAGE_NAME" "$latest_tag"
   CREATED+=("$IMAGE_NAME")
