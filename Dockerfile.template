@@ -75,10 +75,11 @@ RUN mkdir -p /opt/apache-maven && \
   ln -s /opt/apache-maven/bin/mvn /usr/local/bin/mvn && \
   rm /opt/apache-maven.tgz
 # Add git
-RUN curl -L https://lucid-public-tools.s3.amazonaws.com/git/git-bin-2.14.2.tar.gz -o /tmp/git.tar.gz && \
-  tar -C / --extract --file /tmp/git.tar.gz && \
-  /usr/bin/git --version && \
-  rm /tmp/git.tar.gz
+RUN echo "deb http://ftp.us.debian.org/debian testing main contrib non-free" >> /etc/apt/sources.list && \
+  apt-get update && \
+  apt-get install -y git && \
+  apt-get clean all && \
+  /usr/bin/git --version
 ADD requirements.txt /tmp/requirements.txt
 ADD pyenv.sh /tmp/pyenv.sh
 RUN export DEBIAN_FRONTEND=noninteractive TERM=linux && \
