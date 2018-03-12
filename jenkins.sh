@@ -40,7 +40,7 @@ EOM
   fi
 }
 
-DIRS="$(find . -mindepth 1 -maxdepth 1 -type d | sed -e 's,^\./,,' | egrep -v '^\.')"
+DIRS="$(find . -mindepth 1 -maxdepth 1 -type d | grep -v templates | sed -e 's,^\./,,' | egrep -v '^\.')"
 for d in $DIRS; do
   build_and_push "$d"
 done

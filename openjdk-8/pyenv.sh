@@ -2,7 +2,7 @@
 #
 # install a specific version of python with pyenv
 
-PYTHON_VERSION=2.7.10
+PYTHON_VERSION=2.7.14
 
 cd /home/jenkins
 git clone git://github.com/yyuu/pyenv.git .pyenv
