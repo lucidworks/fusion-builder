@@ -35,6 +35,13 @@ RUN if [ "${NEED_OPENJFX}" = "yes" ]; then \
       echo "Not installing OpenJFX"; \
     fi
 
+RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - && \
+  sh -c 'echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list' && \
+  apt-get update; \
+  apt-get install google-chrome-stable; \
+  echo "installed google-chrome-stable"; \
+  dpkg -l | awk '{if ($2 == "google-chrome-stable") print}'
+  
 RUN export DEBIAN_FRONTEND=noninteractive TERM=linux && \
   apt-get -y install ant \
   build-essential libssl-dev libcurl4-openssl-dev libexpat1-dev gettext libz-dev automake autoconf \
