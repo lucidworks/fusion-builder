@@ -22,7 +22,8 @@ ENV JENKINS_UID=7000
 RUN export DEBIAN_FRONTEND=noninteractive TERM=linux && \
   echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selections && \
   apt-get update && \
-  apt-get -y install apt-utils
+  apt-get -y install apt-utils && \
+  apt-get -y upgrade
 
 RUN if [ "${NEED_OPENJFX}" = "yes" ]; then \
       echo "deb http://ftp.de.debian.org/debian jessie main" >> /etc/apt/sources.list && \
@@ -77,6 +78,8 @@ RUN mkdir -p /opt/apache-maven && \
 # Add git
 RUN echo "deb http://ftp.us.debian.org/debian testing main contrib non-free" >> /etc/apt/sources.list && \
   apt-get update && \
+  apt-get upgrade -y && \
+  apt-get install -y --reinstall binutils && \
   apt-get install -y git && \
   apt-get clean all && \
   /usr/bin/git --version
