@@ -49,7 +49,7 @@ RUN export DEBIAN_FRONTEND=noninteractive TERM=linux && \
   libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev libffi-dev libyaml-dev \
   curl netcat-openbsd net-tools procps lsof rpm gnupg gnupg2 expect \
   libmysqlclient-dev libpq-dev libsvn-dev bzip2 libfreetype6 libfontconfig \
-  unzip zip less vim smbclient gtk+3.0-dev libsasl2-dev libldap2-dev && \
+  unzip zip less vim smbclient gtk+3.0-dev libsasl2-dev libldap2-dev moreutils && \
   apt-get clean && \
   rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 RUN groupadd --gid $JENKINS_GID jenkins && \
