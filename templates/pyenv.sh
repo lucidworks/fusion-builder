@@ -11,13 +11,6 @@ git clone https://github.com/pyenv/pyenv-virtualenv.git .pyenv/plugins/pyenv-vir
 (cd .pyenv/plugins/pyenv-virtualenv && git checkout v20150526)
 export PYENV_ROOT=$(pwd)/.pyenv
 export PATH=$PYENV_ROOT/shims:$PYENV_ROOT/bin:$PATH
-cat >>.bashrc <<EOM
-export PYENV_ROOT=\$HOME/.pyenv
-export PATH=\$PYENV_ROOT/shims:\$PYENV_ROOT/bin:\$PATH
-if command -v pyenv 1>/dev/null 2>&1; then
-    eval "\$(pyenv init -)"
-fi
-EOM
 pyenv install $PYTHON_VERSION
 pyenv global $PYTHON_VERSION
 python --version

@@ -1,0 +1,20 @@
+# ~/.fusion-builder-profile
+
+if [[ -z "${DO_NOT_LOAD_PYENV:-}" ]]; then
+    # For the lucidworks/fusion-builder, load pyenv
+    if ! grep -q "$HOME"'/\.pyenv/bin' <<<"$PATH"; then
+        export "PATH=$HOME/.pyenv/bin:$PATH"
+    fi
+
+    if [ -n "$(type -t pyenv)" ] && [ "$(type -t pyenv)" = function ]; then
+        echo "pyenv is already loaded" >/dev/null
+    else
+        if [[ -z "${PYENV_LOADING:-}" ]]; then
+            export PYENV_LOADING=1
+            if command -v pyenv 1>/dev/null 2>&1; then
+                eval "$(pyenv init -)"
+            fi
+            unset PYENV_LOADING
+        fi
+    fi
+fi

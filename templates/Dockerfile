@@ -95,6 +95,10 @@ ADD pyenv.sh /tmp/pyenv.sh
 RUN export DEBIAN_FRONTEND=noninteractive TERM=linux && \
   bash -x /tmp/pyenv.sh
 
+ADD bashrc /home/jenkins/.bashrc
+ADD bash_profile /home/jenkins/.bash_profile
+ADD fusion_builder_profile /home/jenkins/.fusion_builder_profile
+RUN chown jenkins:jenkins /home/jenkins/.bashrc /home/jenkins/.bash_profile /home/jenkins/.fusion_builder_profile
 ADD build.info /build.info
 
 ENV LANGUAGE en_US:en
