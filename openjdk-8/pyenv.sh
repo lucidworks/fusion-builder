@@ -2,11 +2,13 @@
 #
 # install a specific version of python with pyenv
 
-PYTHON_VERSION=2.7.14
+set -exuo pipefail
+
+PYTHON_VERSION=2.7.15
 
 cd /home/jenkins
 git clone git://github.com/pyenv/pyenv.git .pyenv
-(cd .pyenv && git checkout v1.2.2)
+(cd .pyenv && git checkout v1.2.7)
 git clone https://github.com/pyenv/pyenv-virtualenv.git .pyenv/plugins/pyenv-virtualenv
 (cd .pyenv/plugins/pyenv-virtualenv && git checkout v20150526)
 export PYENV_ROOT=$(pwd)/.pyenv
