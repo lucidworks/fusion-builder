@@ -48,7 +48,7 @@ RUN export DEBIAN_FRONTEND=noninteractive TERM=linux && \
   libxml2-dev libxslt1-dev libxmlsec1-dev python-dev python-pip \
   libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev libffi-dev libyaml-dev \
   curl netcat-openbsd net-tools procps lsof rpm gnupg gnupg2 expect \
-  libmysqlclient-dev libpq-dev libsvn-dev bzip2 libfreetype6 libfontconfig \
+  libmysqlclient-dev libpq-dev libsvn-dev bzip2 libfreetype6 libfontconfig libatk-bridge2.0-0 \
   unzip zip less vim smbclient gtk+3.0-dev libsasl2-dev libldap2-dev moreutils dnsutils && \
   apt-get clean && \
   rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
