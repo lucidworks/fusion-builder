@@ -90,6 +90,8 @@ RUN echo "deb http://ftp.us.debian.org/debian testing main contrib non-free" >> 
   apt-get install -y git && \
   apt-get clean all && \
   /usr/bin/git --version
+#Hack line for xlocale.h, remove it once libxslt is updated to 1.1.33: https://github.com/GNOME/libxslt/commit/8b4babb8f742a1a189df4c4569e68eda308df68f
+RUN ln -s /usr/include/locale.h /usr/include/xlocale.h
 ADD requirements.txt /tmp/requirements.txt
 ADD pyenv.sh /tmp/pyenv.sh
 RUN export DEBIAN_FRONTEND=noninteractive TERM=linux && \
