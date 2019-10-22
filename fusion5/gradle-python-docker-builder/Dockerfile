@@ -11,4 +11,4 @@ apt-get clean && \
 groupadd jenkins -g 7000 && \
 useradd jenkins -d /home/jenkins -m -u 7000 -g docker -G docker -s /bin/bash
 
-USER gradle
+USER jenkins
