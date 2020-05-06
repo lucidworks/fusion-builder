@@ -14,6 +14,7 @@ apt-get update && \
 apt-get install -y docker-ce nodejs npm  && \
 apt-get clean && \
 groupadd jenkins -g 7000 && \
+npm install -g typescript && \
 useradd jenkins -d /home/jenkins -m -u 7000 -g docker -G docker -s /bin/bash
 
 WORKDIR /opt
