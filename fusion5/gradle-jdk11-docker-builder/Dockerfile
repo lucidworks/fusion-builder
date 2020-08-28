@@ -1,4 +1,4 @@
-FROM gradle:6.2.2-jdk11
+FROM gradle:6.6.1-jdk11
 
 USER root
 RUN apt-get update && \
