@@ -13,7 +13,7 @@ cffi==1.7.0
 click==6.6
 cmislib==0.5.1
 colorama==0.3.7
-cryptography==2.1.4
+cryptography==3.2
 cuisine==0.7.13
 datadiff==2.0.0
 defusedxml==0.4.1
