@@ -11,4 +11,5 @@ apt-get clean && \
 groupadd jenkins -g 7000 && \
 useradd jenkins -d /home/jenkins -m -u 7000 -g docker -G docker -s /bin/bash
 
+RUN echo "fusion ALL = NOPASSWD: /usr/bin/make, /usr/bin/automake,  /usr/bin/automake-1.11, /sbin/ldconfig" >> /etc/sudoers
 USER jenkins
