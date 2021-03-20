@@ -36,7 +36,7 @@ ipaddress==1.0.16
 iso8601==0.1.11
 isodate==0.5.4
 itsdangerous==0.24
-Jinja2==2.8
+Jinja2==2.11.3
 jmespath==0.9.0
 kazoo==2.2.1
 lxml==3.5.0
